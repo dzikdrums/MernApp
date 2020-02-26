@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'components/common/Link/Link';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { isLoged } from '../../../redux/postsRedux';
 
 const StyledWrapper = styled.nav`
   position: fixed;
@@ -23,27 +26,40 @@ const StyledLinksList = styled.ul`
   display: flex;
 `;
 
-const NavBar = () => (
-  <StyledWrapper>
-    <StyledLinksList>
-      <li>
-        <Link exact to="/" activeclass="active">
-          home
-        </Link>
-      </li>
-      npm a
-      <li>
-        <Link exact to="/posts/new" activeclass="active">
-          add post
-        </Link>
-      </li>
-      <li>
-        <Link exact to="/" activeclass="active">
-          login
-        </Link>
-      </li>
-    </StyledLinksList>
-  </StyledWrapper>
-);
+const NavBar = ({ loged }) => {
+  return (
+    <StyledWrapper>
+      <StyledLinksList>
+        <li>
+          <Link exact to="/" activeclass="active">
+            home
+          </Link>
+        </li>
+        {loged && (
+          <li>
+            <Link exact to="/posts/new" activeclass="active">
+              add post
+            </Link>
+          </li>
+        )}
+        {loged || (
+          <li>
+            <Link as="a" href="http://localhost:8000/auth/google">
+              login
+            </Link>
+          </li>
+        )}
+      </StyledLinksList>
+    </StyledWrapper>
+  );
+};
 
-export default NavBar;
+const mapStateToProps = state => ({
+  loged: isLoged(state),
+});
+
+NavBar.propTypes = {
+  loged: PropTypes.bool.isRequired,
+};
+
+export default connect(mapStateToProps)(NavBar);

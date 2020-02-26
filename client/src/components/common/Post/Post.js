@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Button from 'components/common/Button/Button';
+import { isLoged, deletePostRequest } from '../../../redux/postsRedux';
 
 const StyledWrapper = styled.div`
   width: 600px;
@@ -35,29 +37,44 @@ const StyledAuthor = styled.p`
   font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
-const StyledButton = styled(Button)`
-  display: inline-block;
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  text-decoration: none;
-  padding-top: 16px;
-`;
+class Post extends React.Component {
+  clickHandler = id => {
+    const { deletePost } = this.props;
+    deletePost(id);
+  };
 
-const Post = ({ title, author, id }) => (
-  <StyledWrapper>
-    <InnerWrapper>
-      <StyledTitle>{title}</StyledTitle>
-      <StyledAuthor>{author}</StyledAuthor>
-    </InnerWrapper>
-    <StyledButton as={NavLink} to={`/posts/${id}`}>
-      Read more
-    </StyledButton>
-  </StyledWrapper>
-);
+  render() {
+    const { title, author, id, loged } = this.props;
+
+    return (
+      <StyledWrapper>
+        <InnerWrapper>
+          <StyledTitle>{title}</StyledTitle>
+          <StyledAuthor>{author}</StyledAuthor>
+        </InnerWrapper>
+        <Button NavLink as={NavLink} to={`/posts/${id}`}>
+          Read more
+        </Button>
+        {loged && <Button onClick={() => this.clickHandler(id)}>remove</Button>}
+      </StyledWrapper>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  loged: isLoged(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  deletePost: id => dispatch(deletePostRequest(id)),
+});
 
 Post.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  loged: PropTypes.bool.isRequired,
+  deletePost: PropTypes.func.isRequired,
 };
 
-export default Post;
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Post from 'components/common/Post/Post';
-import getPosts from 'redux/postsRedux';
+import { getPosts } from 'redux/postsRedux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -10,12 +11,23 @@ const StyledWrapper = styled.div`
 `;
 
 const PostsList = ({ posts }) => (
+  /* eslint-disable */
   <StyledWrapper>
-    {posts.posts.data.map(({ _id, title, content, author }) => (
-      <Post key={_id} id={_id} title={title} content={content} author={author} />
+    {posts.map(({ _id, title, text, author }) => (
+      <Post key={_id} id={_id} title={title} text={text} author={author} />
     ))}
   </StyledWrapper>
+  /* eslint-enable */
 );
+
+PostsList.propTypes = {
+  posts: PropTypes.shape({
+    _id: PropTypes.string,
+    author: PropTypes.string,
+    title: PropTypes.string,
+    text: PropTypes.string,
+  }).isRequired,
+};
 
 const mapStateToProps = state => ({
   posts: getPosts(state),

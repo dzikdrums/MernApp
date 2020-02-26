@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { theme } from 'theme/mainTheme';
 import GlobalStyle from 'theme/GlobalStyle';
-import styled from 'styled-components';
+
 import NavBar from 'components/features/NavBar/NavBar';
 
 const StyledWrapper = styled.div`

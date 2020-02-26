@@ -9,6 +9,7 @@ const createActionName = name => `app/${reducerName}/${name}`;
 export const getPosts = ({ posts }) => posts.data;
 export const getSinglePost = ({ posts }) => posts.singlePost;
 export const getRequest = ({ posts }) => posts.request;
+export const isLoged = ({ posts }) => posts.loged;
 
 /* ACTIONS */
 
@@ -36,6 +37,7 @@ const initialState = {
     success: null,
   },
   singlePost: [],
+  loged: true,
 };
 
 /* REDUCER */
@@ -95,7 +97,7 @@ export const loadPostsRequest = () => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      let res = await Axios.get(`http://localhost:8000/api/posts`);
+      const res = await Axios.get(`http://localhost:8000/api/posts`);
       dispatch(loadPosts(res.data));
       dispatch(endRequest());
     } catch (e) {
@@ -108,7 +110,7 @@ export const loadSinglePostRequest = id => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      let res = await Axios.get(`http://localhost:8000/api/posts/${id}`);
+      const res = await Axios.get(`http://localhost:8000/api/posts/${id}`);
       dispatch(loadSinglePost(res.data));
       dispatch(endRequest());
     } catch (e) {
@@ -121,7 +123,21 @@ export const addPostRequest = post => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      let res = await Axios.post(`http://localhost:8000/api/posts`, post);
+      await Axios.post(`http://localhost:8000/api/posts`, post);
+      // dispatch(loadPostsRequest());
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
+export const deletePostRequest = id => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      await Axios.delete(`http://localhost:8000/api/posts/${id}`);
+      dispatch(loadPostsRequest());
       dispatch(endRequest());
     } catch (e) {
       dispatch(errorRequest(e.message));

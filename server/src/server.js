@@ -5,10 +5,19 @@ const path = require("path");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const mongoSanitize = require("mongo-sanitize");
+const passport = require("passport");
+const session = require("express-session");
 
 const postRoutes = require("./routes/post.routes");
+const passportConfig = require("./config/passport");
+const authRoutes = require("./routes/auth.routes");
+const userRoutes = require("./routes/user.routes");
 
 const app = express();
+
+app.use(session({ resave: true, secret: "anything", saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 /* MIDDLEWARE */
 app.use(cors());
@@ -22,6 +31,8 @@ app.use((req, res, next) => {
 
 /* API ENDPOINTS */
 app.use("/api", postRoutes);
+app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 
 /* API ERROR PAGES */
 app.use("/api", (req, res) => {

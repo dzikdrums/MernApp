@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 const Button = styled.button`
   color: ${({ theme }) => theme.grey400};
-  margin: 20px auto;
+  margin: 20px 5px;
   width: 220px;
   height: 47px;
   border: 1px solid ${({ theme }) => theme.yellow};

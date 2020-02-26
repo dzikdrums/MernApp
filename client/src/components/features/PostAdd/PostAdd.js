@@ -8,8 +8,8 @@ import Button from 'components/common/Button/Button';
 class PostAdd extends React.Component {
   state = {
     post: {
-      title: '',
       author: '',
+      title: '',
       text: '',
     },
   };
@@ -23,9 +23,9 @@ class PostAdd extends React.Component {
     const { post } = this.state;
     this.setState({ post: { ...post } });
 
-    e.preventDefault();
     addPostRequest(post);
-    this.setState({ post: { title: '', author: '', text: '' } });
+    e.preventDefault();
+    this.setState({ post: { author: '', title: '', text: '' } });
   };
 
   render() {
@@ -33,15 +33,6 @@ class PostAdd extends React.Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Input
-          name="title"
-          label="Title"
-          type="text"
-          placeholder="title"
-          required
-          value={post.title}
-          onChange={this.handleChange}
-        />
         <Input
           name="author"
           label="Author"
@@ -51,6 +42,16 @@ class PostAdd extends React.Component {
           value={post.author}
           onChange={this.handleChange}
         />
+        <Input
+          name="title"
+          label="Title"
+          type="text"
+          placeholder="title"
+          required
+          value={post.title}
+          onChange={this.handleChange}
+        />
+
         <Input
           as="textarea"
           name="text"
