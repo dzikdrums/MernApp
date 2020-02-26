@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema({
   author: { type: String, required: true },
@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema({
   photo: { type: String },
   price: { type: Number },
   phone: { type: String },
-  location: { type: String },
+  location: { type: String }
 });
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model("Post", postSchema);

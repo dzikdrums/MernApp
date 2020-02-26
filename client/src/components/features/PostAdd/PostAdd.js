@@ -20,12 +20,12 @@ class PostAdd extends React.Component {
   };
 
   handleSubmit = e => {
-    const { addPostRequest } = this.props;
     const { post } = this.state;
     this.setState({ post: { ...post } });
 
     e.preventDefault();
     addPostRequest(post);
+    this.setState({ post: { title: '', author: '', text: '' } });
   };
 
   render() {
@@ -38,6 +38,7 @@ class PostAdd extends React.Component {
           label="Title"
           type="text"
           placeholder="title"
+          required
           value={post.title}
           onChange={this.handleChange}
         />
@@ -46,6 +47,7 @@ class PostAdd extends React.Component {
           label="Author"
           type="text"
           placeholder="author"
+          required
           value={post.author}
           onChange={this.handleChange}
         />
@@ -55,6 +57,7 @@ class PostAdd extends React.Component {
           label="Text"
           type="text"
           placeholder="text"
+          required
           textarea
           value={post.text}
           onChange={this.handleChange}

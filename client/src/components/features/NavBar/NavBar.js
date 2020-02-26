@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import Link from 'components/common/Link/Link';
 
@@ -32,9 +31,15 @@ const NavBar = () => (
           home
         </Link>
       </li>
+      npm a
       <li>
         <Link exact to="/posts/new" activeclass="active">
           add post
+        </Link>
+      </li>
+      <li>
+        <Link exact to="/" activeclass="active">
+          login
         </Link>
       </li>
     </StyledLinksList>

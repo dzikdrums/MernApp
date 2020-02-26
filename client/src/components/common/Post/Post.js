@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Button from 'components/common/Button/Button';
 
 const StyledWrapper = styled.div`
@@ -37,12 +38,11 @@ const StyledAuthor = styled.p`
 const StyledButton = styled(Button)`
   display: inline-block;
   font-size: ${({ theme }) => theme.fontSize.xs};
-  cursor: pointer;
   text-decoration: none;
   padding-top: 16px;
 `;
 
-const Post = ({ title, author, content, id }) => (
+const Post = ({ title, author, id }) => (
   <StyledWrapper>
     <InnerWrapper>
       <StyledTitle>{title}</StyledTitle>
@@ -53,5 +53,11 @@ const Post = ({ title, author, content, id }) => (
     </StyledButton>
   </StyledWrapper>
 );
+
+Post.propTypes = {
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+};
 
 export default Post;

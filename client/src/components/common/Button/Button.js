@@ -11,6 +11,12 @@ const Button = styled.button`
   text-transform: uppercase;
   letter-spacing: 4px;
   outline: none;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+
+  :hover {
+    background-color: ${({ theme }) => theme.yellow};
+  }
 
   ${({ NavLink }) =>
     NavLink &&
