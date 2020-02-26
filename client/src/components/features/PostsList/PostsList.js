@@ -21,12 +21,7 @@ const PostsList = ({ posts }) => (
 );
 
 PostsList.propTypes = {
-  posts: PropTypes.shape({
-    _id: PropTypes.string,
-    author: PropTypes.string,
-    title: PropTypes.string,
-    text: PropTypes.string,
-  }).isRequired,
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = state => ({

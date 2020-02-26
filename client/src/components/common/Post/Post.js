@@ -52,10 +52,14 @@ class Post extends React.Component {
           <StyledTitle>{title}</StyledTitle>
           <StyledAuthor>{author}</StyledAuthor>
         </InnerWrapper>
-        <Button NavLink as={NavLink} to={`/posts/${id}`}>
+        <Button navlink="true" as={NavLink} to={`/posts/${id}`}>
           Read more
         </Button>
-        {loged && <Button onClick={() => this.clickHandler(id)}>remove</Button>}
+        {loged && (
+          <Button primary onClick={() => this.clickHandler(id)}>
+            remove
+          </Button>
+        )}
       </StyledWrapper>
     );
   }

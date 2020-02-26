@@ -21,7 +21,7 @@ exports.getSinglePost = async (req, res) => {
   }
 };
 
-exports.addPost = async function(req, res) {
+exports.addPost = async (req, res) => {
   console.log(req.body);
   console.log("dd");
   try {

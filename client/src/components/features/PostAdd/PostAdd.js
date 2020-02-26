@@ -63,7 +63,9 @@ class PostAdd extends React.Component {
           value={post.text}
           onChange={this.handleChange}
         />
-        <Button type="submit">add post</Button>
+        <Button primary type="submit">
+          add post
+        </Button>
       </Form>
     );
   }

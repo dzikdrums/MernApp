@@ -13,20 +13,19 @@ const Button = styled.button`
   outline: none;
   cursor: pointer;
   transition: background-color 0.5s ease;
+  display: inline-block;
+  text-decoration: none;
+  padding-top: 14px;
+  text-align: center;
 
   :hover {
     background-color: ${({ theme }) => theme.yellow};
   }
 
-  ${({ NavLink }) =>
-    NavLink &&
+  ${({ primary }) =>
+    primary &&
     css`
-      display: inline-block;
-      font-size: ${({ theme }) => theme.fontSize.xs};
-      cursor: pointer;
-      text-decoration: none;
-      padding-top: 16px;
-      text-align: center;
+      padding-top: 0;
     `}
 `;
 
