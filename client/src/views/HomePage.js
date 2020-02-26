@@ -1,19 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PostsList from 'components/features/PostsList/PostsList';
 import PropTypes from 'prop-types';
 import { loadPostsRequest } from 'redux/postsRedux';
 import { connect } from 'react-redux';
 
-class HomePage extends React.Component {
-  componentDidMount() {
-    const { loadPostsRequest } = this.props;
+const HomePage = ({ loadPostsRequest }) => {
+  useEffect(() => {
     loadPostsRequest();
-  }
+  });
 
-  render() {
-    return <PostsList />;
-  }
-}
+  return <PostsList />;
+};
 
 HomePage.propTypes = {
   loadPostsRequest: PropTypes.func.isRequired,

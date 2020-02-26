@@ -38,7 +38,7 @@ const initialState = {
     error: null,
     success: null,
   },
-  singlePost: [],
+  singlePost: {},
   loged: true,
 };
 

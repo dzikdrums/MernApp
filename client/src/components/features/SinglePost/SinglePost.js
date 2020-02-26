@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -34,33 +34,26 @@ const StyledContent = styled.p`
   letter-spacing: 1px;
 `;
 
-class SinglePost extends React.Component {
-  componentDidMount() {
-    const { loadSinglePostRequest, match } = this.props;
-    /* eslint-disable */
-    loadSinglePostRequest(match.params.id);
-    /* eslint-enable */
-  }
+const SinglePost = ({ loadSinglePostRequest, id, post: { title, author, text } }) => {
+  useEffect(() => {
+    loadSinglePostRequest(id);
+  });
 
-  render() {
-    const {
-      post: { title, author, text },
-    } = this.props;
+  // console.log(post);
 
-    return (
-      <StyledWrapper>
-        <InnerWrapper>
-          <StyledTitle>{title}</StyledTitle>
-          <StyledAuthor>{author}</StyledAuthor>
-          <StyledContent>{text}</StyledContent>
-          <Button as={NavLink} NavLink to="/">
-            go back
-          </Button>
-        </InnerWrapper>
-      </StyledWrapper>
-    );
-  }
-}
+  return (
+    <StyledWrapper>
+      <InnerWrapper>
+        <StyledTitle>{title}</StyledTitle>
+        <StyledAuthor>{author}</StyledAuthor>
+        <StyledContent>{text}</StyledContent>
+        <Button as={NavLink} to="/">
+          go back
+        </Button>
+      </InnerWrapper>
+    </StyledWrapper>
+  );
+};
 
 SinglePost.propTypes = {
   post: PropTypes.shape({
@@ -72,7 +65,7 @@ SinglePost.propTypes = {
   author: PropTypes.string,
   text: PropTypes.string,
   loadSinglePostRequest: PropTypes.func.isRequired,
-  match: PropTypes.element,
+  id: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -37,33 +37,28 @@ const StyledAuthor = styled.p`
   font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
-class Post extends React.Component {
-  clickHandler = id => {
-    const { deletePost } = this.props;
+const Post = ({ deletePost, title, author, id, loged }) => {
+  const clickHandler = id => {
     deletePost(id);
   };
 
-  render() {
-    const { title, author, id, loged } = this.props;
-
-    return (
-      <StyledWrapper>
-        <InnerWrapper>
-          <StyledTitle>{title}</StyledTitle>
-          <StyledAuthor>{author}</StyledAuthor>
-        </InnerWrapper>
-        <Button navlink="true" as={NavLink} to={`/posts/${id}`}>
-          Read more
+  return (
+    <StyledWrapper>
+      <InnerWrapper>
+        <StyledTitle>{title}</StyledTitle>
+        <StyledAuthor>{author}</StyledAuthor>
+      </InnerWrapper>
+      <Button navlink="true" as={NavLink} to={`/posts/${id}`}>
+        Read more
+      </Button>
+      {loged && (
+        <Button primary onClick={() => clickHandler(id)}>
+          remove
         </Button>
-        {loged && (
-          <Button primary onClick={() => this.clickHandler(id)}>
-            remove
-          </Button>
-        )}
-      </StyledWrapper>
-    );
-  }
-}
+      )}
+    </StyledWrapper>
+  );
+};
 
 const mapStateToProps = state => ({
   loged: isLoged(state),

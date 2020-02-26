@@ -11,13 +11,11 @@ const StyledWrapper = styled.div`
 `;
 
 const PostsList = ({ posts }) => (
-  /* eslint-disable */
   <StyledWrapper>
     {posts.map(({ _id, title, text, author }) => (
       <Post key={_id} id={_id} title={title} text={text} author={author} />
     ))}
   </StyledWrapper>
-  /* eslint-enable */
 );
 
 PostsList.propTypes = {
