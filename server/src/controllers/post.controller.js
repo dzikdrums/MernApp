@@ -1,5 +1,4 @@
 const Post = require("../models/post.model");
-const uuid = require("uuid");
 
 exports.getPosts = async (req, res) => {
   try {
@@ -29,10 +28,9 @@ exports.addPost = async (req, res) => {
     console.log(title, author, text);
 
     let newPost = new Post({ title, author, text });
-    // newPost.id = uuid();
 
     postSaved = await newPost.save();
-    res.status(200).json(postSaved);
+    // res.status(200).json(postSaved);
   } catch (err) {
     res.status(500).json(err);
   }

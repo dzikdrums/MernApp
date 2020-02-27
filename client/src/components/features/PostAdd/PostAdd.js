@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { addPostRequest } from 'redux/postsRedux';
 import Input from 'components/common/Input/Input';
 import Form from 'components/features/Form/Form';
 import Button from 'components/common/Button/Button';
 
-const PostAdd = () => {
+const PostAdd = ({ addPostRequest }) => {
   const [state, setState] = useState({
     post: {
       author: '',
@@ -66,6 +67,11 @@ const PostAdd = () => {
     </Form>
   );
 };
+
+PostAdd.propTypes = {
+  addPostRequest: PropTypes.string,
+};
+
 const mapDispatchToProps = dispatch => ({
   addPostRequest: post => dispatch(addPostRequest(post)),
 });

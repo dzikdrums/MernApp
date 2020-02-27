@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'components/common/Link/Link';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { isLoged } from '../../../redux/postsRedux';
+import Link from 'components/common/Link/Link';
+import Button from 'components/common/Button/Button';
+import { isLoged, changeLoged } from 'redux/postsRedux';
 
 const StyledWrapper = styled.nav`
   position: fixed;
@@ -14,7 +15,7 @@ const StyledWrapper = styled.nav`
   background-color: ${({ theme }) => theme.yellow};
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 0 30px;
   z-index: 9999;
 `;
@@ -26,9 +27,16 @@ const StyledLinksList = styled.ul`
   display: flex;
 `;
 
-const NavBar = ({ loged }) => {
+const NavBar = ({ loged, changeLoged }) => {
+  const handleButton = () => {
+    changeLoged();
+  };
+
   return (
     <StyledWrapper>
+      <Button onClick={() => handleButton()} primary>
+        login toggle
+      </Button>
       <StyledLinksList>
         <li>
           <Link exact to="/" activeclass="active">
@@ -58,8 +66,13 @@ const mapStateToProps = state => ({
   loged: isLoged(state),
 });
 
+const mapDispatchToProps = dispatch => ({
+  changeLoged: () => dispatch(changeLoged()),
+});
+
 NavBar.propTypes = {
   loged: PropTypes.bool.isRequired,
+  changeLoged: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

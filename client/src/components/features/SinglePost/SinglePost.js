@@ -37,7 +37,7 @@ const StyledContent = styled.p`
 const SinglePost = ({ loadSinglePostRequest, id, post: { title, author, text } }) => {
   useEffect(() => {
     loadSinglePostRequest(id);
-  });
+  }, []);
 
   // console.log(post);
 
