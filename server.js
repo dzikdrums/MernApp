@@ -1,6 +1,6 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 const path = require("path");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
@@ -20,11 +20,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* MIDDLEWARE */
-app.use(
-  cors({
-    origin: "https://mernappdzik.herokuapp.com/"
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://mernappdzik.herokuapp.com/"
+//   })
+// );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
