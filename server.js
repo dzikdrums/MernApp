@@ -36,16 +36,16 @@ app.use((req, res, next) => {
 });
 
 /* REACT WEBSITE */
-app.use(express.static(path.join(__dirname, "/client/build")));
+// app.use(express.static(path.join(__dirname, "/client")));
 
 /* API ENDPOINTS */
 app.use("/api", postRoutes);
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 
-app.use("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/build/index.html"));
-});
+// app.use("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "/client/build/index.html"));
+// });
 
 /* API ERROR PAGES */
 app.use("/api", (req, res) => {
