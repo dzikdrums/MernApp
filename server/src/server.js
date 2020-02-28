@@ -40,10 +40,10 @@ app.use("/api", (req, res) => {
 });
 
 /* REACT WEBSITE */
-// app.use(express.static(path.join(__dirname, '../build')));
-// app.use('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../build/index.html'));
-// });
+app.use(express.static(path.join(__dirname, "../../client/build")));
+app.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/build/index.html"));
+});
 
 /* MONGOOSE */
 mongoose.connect(process.env.NODE_DATABASE, {

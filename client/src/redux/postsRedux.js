@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import { API_URL } from 'config';
 
 /* action name creator */
 const reducerName = 'posts';
@@ -105,7 +106,7 @@ export const loadPostsRequest = () => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const res = await Axios.get(`http://localhost:8000/api/posts`);
+      const res = await Axios.get(`${API_URL}/posts`);
       dispatch(loadPosts(res.data));
       dispatch(endRequest());
     } catch (e) {
@@ -118,7 +119,7 @@ export const loadSinglePostRequest = id => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const res = await Axios.get(`http://localhost:8000/api/posts/${id}`);
+      const res = await Axios.get(`${API_URL}/posts/${id}`);
       dispatch(loadSinglePost(res.data));
       dispatch(endRequest());
     } catch (e) {
@@ -131,7 +132,7 @@ export const addPostRequest = post => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      Axios.post(`http://localhost:8000/api/posts`, post);
+      Axios.post(`${API_URL}/posts`, post);
       dispatch(loadPostsRequest());
       dispatch(endRequest());
     } catch (e) {
@@ -144,7 +145,7 @@ export const deletePostRequest = id => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      await Axios.delete(`http://localhost:8000/api/posts/${id}`);
+      await Axios.delete(`${API_URL}/posts/${id}`);
       dispatch(loadPostsRequest());
       dispatch(endRequest());
     } catch (e) {

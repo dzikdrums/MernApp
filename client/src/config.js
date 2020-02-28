@@ -1,4 +1,1 @@
-module.exports = {
-  PORT: process.env.PORT || 8000,
-  DB: process.env.DB,
-};
+export const API_URL = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:8000/api';
