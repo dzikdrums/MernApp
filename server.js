@@ -5,23 +5,23 @@ const mongoose = require("mongoose");
 const mongoSanitize = require("mongo-sanitize");
 const helmet = require("helmet");
 // const dotenv = require("dotenv").config();
-const passport = require("passport");
-const session = require("express-session");
+// const passport = require("passport");
+// const session = require("express-session");
 const app = express();
 
 // import routes
 const postRoutes = require("./routes/post.routes");
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
-const passportConfig = require("./config/passport");
+// const passportConfig = require("./config/passport");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(helmet());
 
-app.use(session({ resave: true, secret: "anything", saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(session({ resave: true, secret: "anything", saveUninitialized: true }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 /* MIDDLEWARE */
 app.use(
@@ -40,8 +40,8 @@ app.use(express.static(path.join(__dirname, "/client/build")));
 
 /* API ENDPOINTS */
 app.use("/api", postRoutes);
-app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
+app.use("/api", authRoutes);
+app.use("/api", userRoutes);
 
 app.use("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build/index.html"));
