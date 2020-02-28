@@ -20,7 +20,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* MIDDLEWARE */
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://mernappdzik.herokuapp.com/"
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
@@ -34,22 +38,25 @@ app.use("/api", postRoutes);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 
-/* API ERROR PAGES */
-app.use("/api", (req, res) => {
-  res.status(404).send({ post: "Not found..." });
-});
-
 /* REACT WEBSITE */
 app.use(express.static(path.join(__dirname, "./client/build")));
 app.use("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-/* MONGOOSE */
-mongoose.connect(process.env.NODE_DATABASE, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+/* API ERROR PAGES */
+app.use("/api", (req, res) => {
+  res.status(404).send({ post: "Not found..." });
 });
+
+/* MONGOOSE */
+mongoose.connect(
+  `mongodb+srv://dzikdrums:mongo4880po9@dziknote-5co5j.mongodb.net/test?retryWrites=true&w=majority`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+);
 const db = mongoose.connection;
 db.once("open", () => {
   console.log("Successfully connected to the database");
