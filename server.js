@@ -44,11 +44,6 @@ app.use("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-/* API ERROR PAGES */
-app.use("/api", (req, res) => {
-  res.status(404).send({ post: "Not found..." });
-});
-
 /* MONGOOSE */
 mongoose.connect(
   `mongodb+srv://dzikdrums:mongo4880po9@dziknote-5co5j.mongodb.net/test?retryWrites=true&w=majority`,
@@ -67,4 +62,9 @@ db.on("error", err => console.log("Error: " + err));
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log("Server is running on port: " + port);
+});
+
+/* API ERROR PAGES */
+app.use("/api", (req, res) => {
+  res.status(404).send({ post: "Not found..." });
 });
