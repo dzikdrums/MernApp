@@ -8,10 +8,10 @@ const mongoSanitize = require("mongo-sanitize");
 const passport = require("passport");
 const session = require("express-session");
 
-const postRoutes = require("./routes/post.routes");
-const passportConfig = require("./config/passport");
-const authRoutes = require("./routes/auth.routes");
-const userRoutes = require("./routes/user.routes");
+const postRoutes = require("./src/routes/post.routes");
+const passportConfig = require("./src/config/passport");
+const authRoutes = require("./src/routes/auth.routes");
+const userRoutes = require("./src/routes/user.routes");
 
 const app = express();
 
