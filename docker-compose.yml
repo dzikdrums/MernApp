@@ -1,0 +1,22 @@
+version: '3'
+services:
+  backend:
+    image: mern-app-backend:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-backend
+    expose:
+      - 8000
+    ports:
+      - "8000:8000"
+    command: npm start
+  frontend:
+    image: mern-app-frontend:latest
+    build:
+      context: ./client
+      dockerfile: Dockerfile-frontend
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    command: npm start
