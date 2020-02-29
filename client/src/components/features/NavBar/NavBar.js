@@ -52,7 +52,7 @@ const NavBar = ({ loged, changeLoged }) => {
         )}
         {loged || (
           <li>
-            <Link as="a" href="http://localhost:8000/auth/google">
+            <Link as="a" href="https://mernappdzik.herokuapp.com/auth/google">
               login
             </Link>
           </li>
