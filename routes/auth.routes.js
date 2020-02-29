@@ -1,6 +1,6 @@
 const express = require("express");
-const router = express.Router();
 const passport = require("passport");
+const router = express.Router();
 const User = require("../models/user.model");
 
 router.get("/google/user", async (req, res) => {
@@ -28,7 +28,7 @@ router.get(
       let newUser = new User({ id });
 
       userSaved = await newUser.save();
-      res.redirect("https://mernappdzik.herokuapp.com/");
+      res.redirect("http://localhost:3000");
     } catch (err) {
       res.status(500).json(err);
     }
