@@ -54,7 +54,7 @@ app.use("/api", (req, res) => {
 
 /* MONGOOSE */
 mongoose.connect(
-  `mongodb+srv://dzikdrums:mongo4880po9@dziknote-5co5j.mongodb.net/test?retryWrites=true&w=majority`,
+  `mongodb+srv://dzikdrums:${process.env.MONGO_PASS}@dziknote-5co5j.mongodb.net/test?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
