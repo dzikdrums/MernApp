@@ -52,9 +52,7 @@ const NavBar = ({ loged, changeLoged }) => {
         )}
         {loged || (
           <li>
-            <Link exact to="/">
-              login
-            </Link>
+            <Link to="/login">login</Link>
           </li>
         )}
       </StyledLinksList>
