@@ -1,1 +1,12 @@
-Dockerfile-frontend
+FROM node:13.8.0-stretch-slim
+
+RUN mkdir /app
+WORKDIR /app
+
+ADD public/ ./public
+ADD src/ ./src
+ADD [".env", ".editorconfig", ".eslintrc", "package.json", "package-lock.json", ".prettierrc", "./"]
+
+RUN npm install
+
+CMD npm start
