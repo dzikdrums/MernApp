@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 });
 
 /* REACT WEBSITE */
-app.use(express.static(path.join(__dirname, "/client/")));
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 /* API ENDPOINTS */
 app.use("/api", postRoutes);
@@ -48,8 +48,8 @@ app.use("*", (req, res) => {
 });
 
 /* API ERROR PAGES */
-app.use("/api", (req, res) => {
-  res.status(404).send({ post: "Not found..." });
+app.use((req, res) => {
+  res.status(404).send("404 Not found...");
 });
 
 /* MONGOOSE */
