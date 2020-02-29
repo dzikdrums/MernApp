@@ -1,9 +1,7 @@
-const express = require("express");
-const router = express.Router();
 const passport = require("passport");
 const User = require("../models/user.model");
 
-router.get("/google/user", async (req, res) => {
+export.getUser = async (req, res) => {
   try {
     const result = await User.find();
     if (!result) res.status(404).json({ post: "Not found" });
@@ -11,7 +9,7 @@ router.get("/google/user", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+};
 
 router.get(
   "/google",
