@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { addPostRequest } from 'redux/postsRedux';
 import Input from 'components/common/Input/Input';
 import Form from 'components/features/Form/Form';
 import Button from 'components/common/Button/Button';
+
+const ButtonWrapper = styled.div`
+  padding-top: 70px;
+  display: flex;
+  justify-content: center;
+`;
 
 const PostAdd = ({ addPostRequest }) => {
   const [state, setState] = useState({
@@ -13,12 +20,13 @@ const PostAdd = ({ addPostRequest }) => {
       title: '',
       text: '',
     },
+    posted: false,
   });
 
-  const { post } = state;
+  const { post, posted } = state;
 
   const handleChange = e => {
-    setState({ post: { ...post, [e.target.name]: e.target.value } });
+    setState({ posted: false, post: { ...post, [e.target.name]: e.target.value } });
   };
 
   const handleSubmit = e => {
@@ -26,50 +34,59 @@ const PostAdd = ({ addPostRequest }) => {
 
     addPostRequest(post);
     e.preventDefault();
-    setState({ post: { author: '', title: '', text: '' } });
+    setState({ post: { author: '', title: '', text: '' }, posted: true });
   };
 
-  return (
-    <Form onSubmit={handleSubmit}>
-      <Input
-        name="author"
-        label="Author"
-        type="text"
-        placeholder="author"
-        required
-        value={post.author}
-        onChange={handleChange}
-      />
-      <Input
-        name="title"
-        label="Title"
-        type="text"
-        placeholder="title"
-        required
-        value={post.title}
-        onChange={handleChange}
-      />
+  if (posted === false) {
+    return (
+      <Form onSubmit={handleSubmit}>
+        <Input
+          name="author"
+          label="Author"
+          type="text"
+          placeholder="author"
+          required
+          value={post.author}
+          onChange={handleChange}
+        />
+        <Input
+          name="title"
+          label="Title"
+          type="text"
+          placeholder="title"
+          required
+          value={post.title}
+          onChange={handleChange}
+        />
 
-      <Input
-        as="textarea"
-        name="text"
-        label="Text"
-        type="text"
-        placeholder="text"
-        required
-        textarea
-        value={post.text}
-        onChange={handleChange}
-      />
-      <Button primary type="submit">
-        add post
+        <Input
+          as="textarea"
+          name="text"
+          label="Text"
+          type="text"
+          placeholder="text"
+          required
+          textarea
+          value={post.text}
+          onChange={handleChange}
+        />
+        <Button primary type="submit">
+          add post
+        </Button>
+      </Form>
+    );
+  }
+  return (
+    <ButtonWrapper>
+      <Button primary posted>
+        posted!
       </Button>
-    </Form>
+    </ButtonWrapper>
   );
 };
 
 PostAdd.propTypes = {
-  addPostRequest: PropTypes.string,
+  addPostRequest: PropTypes.func,
 };
 
 const mapDispatchToProps = dispatch => ({

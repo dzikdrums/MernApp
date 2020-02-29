@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { loadSinglePostRequest, getSinglePost } from 'redux/postsRedux';
 import Button from 'components/common/Button/Button';
+import Spinner from 'components/common/Spinner/Spinner';
+import { getRequest } from '../../../redux/postsRedux';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -34,24 +36,35 @@ const StyledContent = styled.p`
   letter-spacing: 1px;
 `;
 
-const SinglePost = ({ loadSinglePostRequest, id, post: { title, author, text } }) => {
+const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+`;
+
+const SinglePost = ({ loading, loadSinglePostRequest, id, post: { title, author, text } }) => {
   useEffect(() => {
     loadSinglePostRequest(id);
   }, []);
 
-  // console.log(post);
-
+  if (loading.pending === false && loading.success === true) {
+    return (
+      <StyledWrapper>
+        <InnerWrapper>
+          <StyledTitle>{title}</StyledTitle>
+          <StyledAuthor>{author}</StyledAuthor>
+          <StyledContent>{text}</StyledContent>
+          <Button as={NavLink} to="/">
+            go back
+          </Button>
+        </InnerWrapper>
+      </StyledWrapper>
+    );
+  }
   return (
-    <StyledWrapper>
-      <InnerWrapper>
-        <StyledTitle>{title}</StyledTitle>
-        <StyledAuthor>{author}</StyledAuthor>
-        <StyledContent>{text}</StyledContent>
-        <Button as={NavLink} to="/">
-          go back
-        </Button>
-      </InnerWrapper>
-    </StyledWrapper>
+    <SpinnerWrapper>
+      <Spinner />
+    </SpinnerWrapper>
   );
 };
 
@@ -60,6 +73,10 @@ SinglePost.propTypes = {
     title: PropTypes.string,
     author: PropTypes.string,
     text: PropTypes.string,
+  }),
+  loading: PropTypes.shape({
+    pending: PropTypes.bool,
+    success: PropTypes.bool,
   }),
   title: PropTypes.string,
   author: PropTypes.string,
@@ -70,6 +87,7 @@ SinglePost.propTypes = {
 
 const mapStateToProps = state => ({
   post: getSinglePost(state),
+  loading: getRequest(state),
 });
 
 const mapDispatchToProps = dispatch => ({

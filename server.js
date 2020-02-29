@@ -24,9 +24,14 @@ app.use(helmet());
 // app.use(passport.session());
 
 /* MIDDLEWARE */
+const origin =
+  process.env.NODE_EVV === "production"
+    ? "https://mernappdzik.herokuapp.com/"
+    : "http://localhost:3000";
+
 app.use(
   cors({
-    origin: "https://mernappdzik.herokuapp.com/"
+    origin: origin
   })
 );
 

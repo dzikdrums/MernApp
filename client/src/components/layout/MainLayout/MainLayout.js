@@ -13,8 +13,6 @@ const StyledWrapper = styled.div`
   margin: 0 auto;
 `;
 
-console.log(process.env);
-
 const MainLayout = ({ children }) => (
   <ThemeProvider theme={theme}>
     <GlobalStyle />

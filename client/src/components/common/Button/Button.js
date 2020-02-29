@@ -27,6 +27,13 @@ const Button = styled.button`
     css`
       padding-top: 0;
     `}
+
+  ${({ posted }) =>
+    posted &&
+    css`
+      background-color: ${({ theme }) => theme.yellow};
+      cursor: default;
+    `}
 `;
 
 export default Button;
