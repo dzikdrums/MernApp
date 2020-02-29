@@ -52,7 +52,7 @@ const NavBar = ({ loged, changeLoged }) => {
         )}
         {loged || (
           <li>
-            <Link as="a" href="https://mernappdzik.herokuapp.com/auth/google">
+            <Link exact to="/">
               login
             </Link>
           </li>
