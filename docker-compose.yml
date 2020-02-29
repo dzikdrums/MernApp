@@ -1,6 +1,6 @@
 version: '3'
 services:
-  api:
+  backend:
     image: mern-app-backend:latest
     build:
       context: .
@@ -14,7 +14,7 @@ services:
     image: mern-app-frontend:latest
     build:
       context: ./client
-      dockerfile: ./client/Dockerfile-frontend
+      dockerfile: Dockerfile-frontend
     expose:
       - 3000
     ports:
