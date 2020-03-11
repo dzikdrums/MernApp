@@ -1,10 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import { deletePostRequest, isLoged } from '../../../redux/postsRedux';
+
+import Button from 'components/common/Button/Button';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import Button from 'components/common/Button/Button';
-import { isLoged, deletePostRequest } from '../../../redux/postsRedux';
+import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
   width: 600px;

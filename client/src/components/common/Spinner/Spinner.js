@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
+import { PulseLoader } from 'react-spinners';
 import React from 'react';
 import { css } from '@emotion/core';
-import { PulseLoader } from 'react-spinners';
-import PropTypes from 'prop-types';
 
 // Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
@@ -17,7 +17,7 @@ const Spinner = ({ loading }) => (
 );
 
 Spinner.propTypes = {
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
 };
 
 export default Spinner;

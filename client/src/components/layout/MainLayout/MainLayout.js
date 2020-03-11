@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { ThemeProvider } from 'styled-components';
-import { theme } from 'theme/mainTheme';
+import styled from 'styled-components';
 import GlobalStyle from 'theme/GlobalStyle';
 
 import NavBar from 'components/features/NavBar/NavBar';
@@ -14,13 +13,13 @@ const StyledWrapper = styled.div`
 `;
 
 const MainLayout = ({ children }) => (
-  <ThemeProvider theme={theme}>
+  <>
     <GlobalStyle />
     <StyledWrapper>
       <NavBar />
       {children}
     </StyledWrapper>
-  </ThemeProvider>
+  </>
 );
 
 MainLayout.propTypes = {

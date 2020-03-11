@@ -15,6 +15,7 @@ const Button = styled.button`
   transition: background-color 0.5s ease;
   display: inline-block;
   text-decoration: none;
+  background-color: white;
   padding-top: 14px;
   text-align: center;
 
